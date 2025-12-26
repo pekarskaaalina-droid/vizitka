@@ -1,0 +1,2379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alina | Make up artist & Hairstylist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Marck+Script&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B0000; /* Темно-бордовый */
+            --secondary: #B22222; /* Огненно-красный */
+            --accent: #DC143C; /* Малиновый */
+            --dark: #2A2A2A;
+            --light: #FFF5F5; /* Светло-розовый фон */
+            --white: #FFFFFF;
+            --cream: #FFFAFA; /* Снежный белый */
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* НАВИГАЦИЯ - Бордово-белая */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 250, 250, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(139, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .nav-scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(139, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s ease;
+        }
+        
+        .logo:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+            font-weight: 500;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Мобильное меню */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+        
+        .hamburger {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .hamburger::before {
+            top: -8px;
+        }
+        
+        .hamburger::after {
+            bottom: -8px;
+        }
+        
+        /* ПЕРВАЯ СЕКЦИЯ - Темно-бордовый фон */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background: linear-gradient(45deg, #8B0000 0%, #B22222 100%);
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 255, 255, 0.02) 2px, rgba(255, 255, 255, 0.02) 4px);
+            z-index: 0;
+        }
+        
+        /* ЗЕРКАЛО С НАДПИСЬЮ В ТРИ СТРОКИ */
+        .mirror-element {
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            z-index: 5;
+            animation: floatMirror 8s ease-in-out infinite;
+        }
+        
+        .mirror-container {
+            position: relative;
+            width: 380px;
+            height: 380px;
+        }
+        
+        .mirror-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8)) 
+                    brightness(1.2) 
+                    contrast(1.15);
+            transition: var(--transition);
+        }
+        
+        /* Текст в три строки */
+        .mirror-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-7deg);
+            width: 75%;
+            text-align: center;
+            font-family: 'Marck Script', cursive;
+            font-size: 2rem;
+            font-weight: 400;
+            color: rgba(139, 0, 0, 0.85);
+            text-shadow: 
+                0 2px 4px rgba(255, 255, 255, 0.7),
+                0 0 25px rgba(255, 255, 255, 0.4);
+            line-height: 1.3; /* Увеличил для трех строк */
+            pointer-events: none;
+            z-index: 2;
+            padding: 5px;
+            background: transparent !important;
+            border-radius: 0;
+            backdrop-filter: none !important;
+            border: none;
+            letter-spacing: 1px;
+            word-spacing: 1px;
+        }
+        
+        /* Стили для отдельных строк */
+        .mirror-text-line {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .mirror-text-line:nth-child(1) {
+            font-size: 2.2rem; /* Немного больше для "твое" */
+            margin-bottom: 5px;
+        }
+        
+        .mirror-text-line:nth-child(2) {
+            font-size: 1.9rem; /* Чуть меньше для "отражение" */
+            margin-bottom: 5px;
+        }
+        
+        .mirror-text-line:nth-child(3) {
+            font-size: 1.7rem; /* Еще меньше для "в моих руках" */
+            font-style: italic;
+        }
+        
+        /* Эффект золотой вышивки для текста */
+        .mirror-text-overlay::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: calc(100% + 10px);
+            height: calc(100% + 10px);
+            background: radial-gradient(circle at center, 
+                rgba(218, 165, 32, 0.15) 0%, 
+                transparent 70%);
+            z-index: -1;
+            opacity: 0.8;
+            border-radius: 15px;
+            pointer-events: none;
+        }
+        
+        /* Эффект свечения */
+        .mirror-text-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, 
+                rgba(255, 255, 255, 0.08) 0%, 
+                transparent 70%);
+            z-index: -2;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        /* Эффект отражения в зеркале */
+        .mirror-reflection {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.12) 50%, 
+                transparent 70%);
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: overlay;
+        }
+        
+        /* Эффект при наведении */
+        .mirror-container:hover .mirror-image {
+            transform: scale(1.05) rotate(2deg);
+            filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.9)) 
+                    brightness(1.25);
+        }
+        
+        .mirror-container:hover .mirror-text-overlay {
+            color: rgba(139, 0, 0, 0.95);
+            text-shadow: 
+                0 3px 6px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%) rotate(-5deg);
+            transition: var(--transition);
+        }
+        
+        .mirror-container:hover .mirror-text-overlay::before {
+            opacity: 0.9;
+            background: radial-gradient(circle at center, 
+                rgba(218, 165, 32, 0.25) 0%, 
+                transparent 70%);
+            transition: var(--transition);
+        }
+        
+        /* Анимация плавающего зеркала */
+        @keyframes floatMirror {
+            0%, 100% {
+                transform: translateY(0) rotate(-4deg);
+            }
+            33% {
+                transform: translateY(-15px) rotate(-1deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+        }
+        
+        .hero-title {
+            font-size: 5.5rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            color: var(--white);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            margin-bottom: 50px;
+            letter-spacing: 4px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-subtitle span {
+            display: block;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 45px;
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            z-index: 2;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--white), rgba(255, 255, 255, 0.8));
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .cta-button:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: transparent;
+        }
+        
+        .cta-button:hover::before {
+            left: 0;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator span {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+        
+        /* СЕКЦИЯ "ОБО МНЕ" - ОБНОВЛЕННЫЙ ДИЗАЙН */
+        .about-section {
+            padding: 120px 0;
+            background: var(--white);
+            position: relative;
+        }
+        
+        .about-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 80px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        
+        .about-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .about-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Левая колонка с заметками */
+        .notes-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        /* Правая колонка с заметками */
+        .notes-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        /* Центральная колонка с фото */
+        .photo-center {
+            flex: 1.2;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Заметки (стилизованные блоки) */
+        .note-card {
+            background: var(--light);
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(139, 0, 0, 0.08);
+            border: 2px solid rgba(139, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        
+        .note-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(139, 0, 0, 0.15);
+            border-color: var(--accent);
+        }
+        
+        .note-card:nth-child(2n)::before {
+            background: linear-gradient(to bottom, var(--accent), var(--primary));
+        }
+        
+        /* Декоративные элементы для заметок */
+        .note-decoration {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            color: rgba(139, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+        
+        .note-card:hover .note-decoration {
+            color: var(--accent);
+            transform: rotate(15deg) scale(1.2);
+        }
+        
+        .note-title {
+            font-family: 'Marck Script', cursive;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            line-height: 1.2;
+            font-weight: 400;
+        }
+        
+        .note-text {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+        
+        /* Фото в центре */
+        .photo-frame {
+            position: relative;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--white), var(--cream));
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 50px rgba(139, 0, 0, 0.2),
+                0 0 0 15px var(--white),
+                0 0 0 18px rgba(139, 0, 0, 0.1);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .photo-frame:hover {
+            transform: scale(1.02);
+            box-shadow: 
+                0 35px 70px rgba(139, 0, 0, 0.3),
+                0 0 0 15px var(--white),
+                0 0 0 18px var(--accent);
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+        
+        .photo-frame:hover img {
+            transform: scale(1.03);
+        }
+        
+        /* Декоративные элементы для фото */
+        .photo-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            z-index: 1;
+        }
+        
+        .corner-tl {
+            top: 10px;
+            left: 10px;
+            border-top: 3px solid var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .corner-tr {
+            top: 10px;
+            right: 10px;
+            border-top: 3px solid var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+        
+        .corner-bl {
+            bottom: 10px;
+            left: 10px;
+            border-bottom: 3px solid var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .corner-br {
+            bottom: 10px;
+            right: 10px;
+            border-bottom: 3px solid var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+        
+        /* Декоративная надпись под фото */
+        .photo-signature {
+            text-align: center;
+            margin-top: 25px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            position: relative;
+            padding-top: 15px;
+        }
+        
+        .photo-signature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        /* СЕКЦИЯ УСЛУГ - ПОЛНОРАЗМЕРНЫЕ ФОТО */
+        .services-section {
+            padding: 120px 0;
+            background: var(--light);
+            position: relative;
+        }
+        
+        /* Заголовок секции */
+        .services-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .services-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .services-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .services-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: #666;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Сетка услуг */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        /* Карточка услуги - ФОТО ВО ВСЮ ДЛИНУ */
+        .service-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: 0 8px 30px rgba(139, 0, 0, 0.08);
+            border: 1px solid rgba(139, 0, 0, 0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        /* Изображение услуги - ПОЛНОРАЗМЕРНОЕ */
+        .service-image-container {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            min-height: 350px;
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        /* Затемнение для текста */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, 
+                rgba(0, 0, 0, 0.4) 0%, 
+                rgba(0, 0, 0, 0.2) 30%, 
+                transparent 50%);
+            z-index: 1;
+            transition: var(--transition);
+        }
+        
+        /* Номер услуги */
+        .service-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            z-index: 2;
+            border: 1px solid rgba(139, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        /* Контент карточки - НАД ФОТО */
+        .service-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 35px 30px;
+            z-index: 2;
+            background: linear-gradient(to top, 
+                rgba(0, 0, 0, 0.6) 0%, 
+                rgba(0, 0, 0, 0.3) 50%, 
+                transparent 100%);
+            transition: var(--transition);
+        }
+        
+        .service-name {
+            font-family: 'Marck Script', cursive;
+            font-size: 2.2rem;
+            color: var(--white);
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+        
+        .service-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-family: 'Cormorant Garamond', serif;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+        
+        /* Акцентная линия внизу карточки */
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: var(--transition);
+            z-index: 3;
+        }
+        
+        /* Эффекты при наведении - ОБНОВЛЕНО: бордовый текст */
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.15);
+            border-color: rgba(139, 0, 0, 0.1);
+        }
+        
+        .service-card:hover .service-image {
+            transform: scale(1.05);
+        }
+        
+        .service-card:hover .service-content {
+            background: linear-gradient(to top, 
+                rgba(139, 0, 0, 0.7) 0%, 
+                rgba(139, 0, 0, 0.4) 50%, 
+                rgba(139, 0, 0, 0.1) 100%);
+        }
+        
+        .service-card:hover .image-overlay {
+            background: linear-gradient(to top, 
+                rgba(139, 0, 0, 0.5) 0%, 
+                rgba(139, 0, 0, 0.3) 30%, 
+                rgba(139, 0, 0, 0.1) 50%);
+        }
+        
+        .service-card:hover .service-name,
+        .service-card:hover .service-description {
+            color: var(--white);
+            text-shadow: 0 2px 4px rgba(139, 0, 0, 0.5);
+        }
+        
+        .service-card:hover .service-number {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--white);
+        }
+        
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* СЕКЦИЯ ЗАПИСИ (СКРЫТА ПО УМОЛЧАНИЮ) */
+        .booking-section {
+            display: none; /* Скрыта по умолчанию */
+            padding: 120px 0;
+            background: var(--white);
+        }
+        
+        .booking-section.active {
+            display: block; /* Показывается при активации */
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(139, 0, 0, 0.1);
+            border: 1px solid rgba(139, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(139, 0, 0, 0.2);
+            background: var(--white);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            border-radius: 8px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238B0000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.3);
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* СЕКЦИЯ ОТЗЫВОВ С ОТОБРАЖЕНИЕМ */
+        .feedback-section {
+            padding: 120px 0;
+            background: var(--light);
+        }
+        
+        .feedback-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 80px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        /* Блок с существующими отзывами */
+        .reviews-display {
+            margin-bottom: 80px;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .review-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.08);
+            border: 1px solid rgba(139, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(139, 0, 0, 0.15);
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(139, 0, 0, 0.1);
+        }
+        
+        .review-author {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .review-service {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .review-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .review-star {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+        
+        .review-text {
+            color: #666;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .review-date {
+            font-size: 0.85rem;
+            color: #999;
+            text-align: right;
+        }
+        
+        /* Форма для отправки отзывов */
+        .feedback-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(139, 0, 0, 0.1);
+            border: 1px solid rgba(139, 0, 0, 0.1);
+        }
+        
+        .rating-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .rating-star {
+            font-size: 1.8rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .rating-star:hover,
+        .rating-star.active {
+            color: #ffd700;
+            transform: scale(1.2);
+        }
+        
+        /* КНОПКА НАВЕРХ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4);
+        }
+        
+        /* ФУТЕР - ОБНОВЛЕННЫЙ */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .footer-content p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 1200px) {
+            .mirror-element {
+                left: 30px;
+                top: 90px;
+            }
+            
+            .mirror-container {
+                width: 340px;
+                height: 340px;
+            }
+            
+            .mirror-text-overlay {
+                font-size: 1.8rem;
+            }
+            
+            .mirror-text-line:nth-child(1) {
+                font-size: 2rem;
+            }
+            
+            .mirror-text-line:nth-child(2) {
+                font-size: 1.7rem;
+            }
+            
+            .mirror-text-line:nth-child(3) {
+                font-size: 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 4.5rem;
+            }
+            
+            .about-layout {
+                gap: 40px;
+                padding: 0 20px;
+            }
+            
+            .note-title {
+                font-size: 1.9rem;
+            }
+            
+            .note-text {
+                font-size: 1rem;
+            }
+            
+            /* Адаптивность для услуг */
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 35px;
+            }
+            
+            .services-title {
+                font-size: 3.5rem;
+            }
+            
+            .service-image-container {
+                min-height: 300px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .mirror-element {
+                top: 80px;
+                left: 20px;
+            }
+            
+            .mirror-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .mirror-text-overlay {
+                font-size: 1.6rem;
+            }
+            
+            .mirror-text-line:nth-child(1) {
+                font-size: 1.8rem;
+            }
+            
+            .mirror-text-line:nth-child(2) {
+                font-size: 1.5rem;
+            }
+            
+            .mirror-text-line:nth-child(3) {
+                font-size: 1.3rem;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .about-layout {
+                flex-direction: column;
+                gap: 50px;
+            }
+            
+            .notes-left, 
+            .notes-right {
+                flex: 1;
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .photo-center {
+                flex: 1;
+                order: -1;
+                width: 80%;
+                max-width: 500px;
+                margin-bottom: 40px;
+            }
+            
+            .about-title {
+                font-size: 2.8rem;
+                margin-bottom: 60px;
+            }
+            
+            .services-grid {
+                gap: 30px;
+            }
+            
+            .service-image-container {
+                min-height: 280px;
+            }
+            
+            .service-content {
+                padding: 30px 25px;
+            }
+            
+            .service-name {
+                font-size: 2rem;
+            }
+            
+            .service-description {
+                font-size: 1rem;
+            }
+            
+            .services-title {
+                font-size: 3rem;
+            }
+            
+            .services-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                box-shadow: -5px 0 20px rgba(139, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .menu-toggle.active .hamburger {
+                background: transparent;
+            }
+            
+            .menu-toggle.active .hamburger::before {
+                transform: rotate(45deg);
+                top: 0;
+            }
+            
+            .menu-toggle.active .hamburger::after {
+                transform: rotate(-45deg);
+                bottom: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mirror-element {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin: 60px auto 40px;
+                animation: floatMirror 6s ease-in-out infinite;
+            }
+            
+            .mirror-container {
+                width: 320px;
+                height: 320px;
+            }
+            
+            .mirror-text-overlay {
+                font-size: 1.7rem;
+            }
+            
+            .mirror-text-line:nth-child(1) {
+                font-size: 1.9rem;
+            }
+            
+            .mirror-text-line:nth-child(2) {
+                font-size: 1.6rem;
+            }
+            
+            .mirror-text-line:nth-child(3) {
+                font-size: 1.4rem;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+                letter-spacing: 3px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+            
+            .about-section {
+                padding: 80px 0;
+            }
+            
+            .about-title {
+                font-size: 2.3rem;
+                margin-bottom: 50px;
+            }
+            
+            .photo-center {
+                width: 90%;
+            }
+            
+            .note-card {
+                padding: 25px 20px;
+            }
+            
+            .note-title {
+                font-size: 1.7rem;
+            }
+            
+            .photo-signature {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .services-title {
+                font-size: 2.5rem;
+            }
+            
+            .services-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .service-image-container {
+                min-height: 350px;
+            }
+            
+            .services-header {
+                margin-bottom: 60px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .booking-form,
+            .feedback-form-container {
+                padding: 30px 20px;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .social-links {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mirror-element {
+                margin: 50px auto 30px;
+            }
+            
+            .mirror-container {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .mirror-text-overlay {
+                font-size: 1.5rem;
+                width: 80%;
+            }
+            
+            .mirror-text-line:nth-child(1) {
+                font-size: 1.7rem;
+            }
+            
+            .mirror-text-line:nth-child(2) {
+                font-size: 1.4rem;
+            }
+            
+            .mirror-text-line:nth-child(3) {
+                font-size: 1.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 0.9rem;
+            }
+            
+            .about-title {
+                font-size: 2rem;
+            }
+            
+            .photo-frame {
+                padding: 15px;
+            }
+            
+            .note-title {
+                font-size: 1.5rem;
+            }
+            
+            .note-text {
+                font-size: 0.95rem;
+            }
+            
+            .photo-signature {
+                font-size: 1.5rem;
+            }
+            
+            .services-section {
+                padding: 80px 0;
+            }
+            
+            .services-title {
+                font-size: 2.2rem;
+            }
+            
+            .services-subtitle {
+                font-size: 1rem;
+            }
+            
+            .service-image-container {
+                min-height: 300px;
+            }
+            
+            .service-content {
+                padding: 25px 20px;
+            }
+            
+            .service-name {
+                font-size: 1.8rem;
+            }
+            
+            .service-description {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .social-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .mirror-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .mirror-text-overlay {
+                font-size: 1.3rem;
+                width: 85%;
+            }
+            
+            .mirror-text-line:nth-child(1) {
+                font-size: 1.5rem;
+            }
+            
+            .mirror-text-line:nth-child(2) {
+                font-size: 1.2rem;
+            }
+            
+            .mirror-text-line:nth-child(3) {
+                font-size: 1.1rem;
+            }
+            
+            .service-image-container {
+                min-height: 250px;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <nav id="main-nav">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">PEKARSKAYA_MAKEUP</a>
+            
+            <button class="menu-toggle" id="mobile-menu" aria-label="Меню">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#services">Услуги</a></li>
+                
+                <li><a href="#feedback">Отзывы</a></li>
+                <li><button class="book-nav-btn" id="book-nav-btn" style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--white); border: none; padding: 10px 25px; border-radius: 50px; font-family: inherit; font-weight: 600; letter-spacing: 1px; cursor: pointer; transition: var(--transition); font-size: 0.95rem; box-shadow: 0 4px 15px rgba(139, 0, 0, 0.2);">Записаться</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ПЕРВАЯ СЕКЦИЯ - Темно-бордовый фон -->
+    <section class="hero-section" id="hero">
+        <div class="hero-bg"></div>
+        
+        <!-- ЗЕРКАЛО С НАДПИСЬЮ В ТРИ СТРОКИ -->
+        <div class="mirror-element">
+            <div class="mirror-container">
+                <img src="зеркало.webp" 
+                     alt="Зеркало" 
+                     class="mirror-image">
+                <div class="mirror-text-overlay">
+                    <span class="mirror-text-line">твое</span>
+                    <span class="mirror-text-line">отражение</span>
+                    <span class="mirror-text-line">в моих руках</span>
+                </div>
+                <div class="mirror-reflection"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <h1 class="hero-title">ALINA</h1>
+            <p class="hero-subtitle">
+                MAKE UP ARTIST & HAIRSTYLIST
+                <span>INST: PEKARSKAYA_MAKEUP</span>
+            </p>
+            <a href="#booking" class="cta-button" id="hero-book-btn">
+                <i class="fas fa-heart"></i>
+                ЗАПИСАТЬСЯ 
+            </a>
+        </div>
+        
+        <div class="scroll-indicator" id="scroll-down">
+            <span>Листайте вниз</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ "ОБО МНЕ" - ОБНОВЛЕННЫЙ ДИЗАЙН -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="about-title">Обо мне</h2>
+            
+            <div class="about-layout">
+                <!-- Левая колонка с заметками -->
+                <div class="notes-left">
+                    <div class="note-card">
+                        <div class="note-decoration">✧</div>
+                        <h3 class="note-title">Профессионализм</h3>
+                        <p class="note-text">
+                            Сертифицированные курсы у ведущих визажистов Беларуси. 
+                            Постоянно совершенствую свои навыки на мастер-классах и обучениях.
+                        </p>
+                    </div>
+                    
+                    <div class="note-card">
+                        <div class="note-decoration">♥</div>
+                        <h3 class="note-title">Философия красоты</h3>
+                        <p class="note-text">
+                            Верю, что настоящая красота — в естественности. Моя задача — подчеркнуть ваши достоинства, 
+                            создать гармоничный образ, который отражает вашу уникальность.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Центральная колонка с фото -->
+                <div class="photo-center">
+                    <div class="photo-frame">
+                        <div class="photo-corner corner-tl"></div>
+                        <div class="photo-corner corner-tr"></div>
+                        <img src="я.JPG" alt="Алина - профессиональный визажист и стилист">
+                        <div class="photo-corner corner-bl"></div>
+                        <div class="photo-corner corner-br"></div>
+                    </div>
+                    <div class="photo-signature">Alina</div>
+                </div>
+                
+                <!-- Правая колонка с заметками -->
+                <div class="notes-right">
+                    <div class="note-card">
+                        <div class="note-decoration">★</div>
+                        <h3 class="note-title">Индивидуальный подход</h3>
+                        <p class="note-text">
+                            Каждый клиент для меня — уникальная история. Я учитываю особенности внешности, цветотип, 
+                            тип кожи и личные пожелания. Ваш комфорт и удовлетворение — мой приоритет.
+                        </p>
+                    </div>
+                    
+                    <div class="note-card">
+                        <div class="note-decoration">✦</div>
+                        <h3 class="note-title">Материалы и технологии</h3>
+                        <p class="note-text">
+                            Использую профессиональную косметику. Современные техники макияжа 
+                            и укладки, которые обеспечивают стойкий и безупречный результат на весь день.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ УСЛУГ - ПОЛНОРАЗМЕРНЫЕ ФОТО -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="services-header">
+                <h2 class="services-title">Мои услуги</h2>
+                <p class="services-subtitle">
+                    Каждая услуга создается с особым вниманием к деталям и индивидуальным потребностям клиента
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Услуга 1 -->
+                <div class="service-card">
+                    <div class="service-number">01</div>
+                    
+                    <div class="service-image-container">
+                        <img src="дневной макияж.jpg" alt="Дневной макияж" class="service-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3 class="service-name">Дневной макияж</h3>
+                        <p class="service-description">
+                            Естественный макияж для повседневной жизни. Подчеркивает вашу красоту без излишеств, 
+                            создавая свежий и ухоженный вид на весь день.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Услуга 2 -->
+                <div class="service-card">
+                    <div class="service-number">02</div>
+                    
+                    <div class="service-image-container">
+                        <img src="свадебный.jpg" alt="Свадебный макияж" class="service-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3 class="service-name">Свадебный макияж</h3>
+                        <p class="service-description">
+                            Нежный и стойкий макияж для самого важного дня. Создаю образ, который сохранит 
+                            безупречность на протяжении всего торжества и в фотографиях.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Услуга 3 -->
+                <div class="service-card">
+                    <div class="service-number">03</div>
+                    
+                    <div class="service-image-container">
+                        <img src="вечерний макияж.jpg" alt="Вечерний макияж" class="service-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3 class="service-name">Вечерний макияж</h3>
+                        <p class="service-description">
+                            Выразительный макияж для особых мероприятий. Акцент на драматичность, 
+                            долговечность и безупречный вид в вечернем освещении.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Услуга 4 -->
+                <div class="service-card">
+                    <div class="service-number">04</div>
+                    
+                    <div class="service-image-container">
+                        <img src="прически.jpg" alt="Укладки и прически" class="service-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3 class="service-name">Укладки и прически</h3>
+                        <p class="service-description">
+                            Профессиональные укладки и прически для любого случая. От элегантных повседневных 
+                            вариантов до сложных свадебных причесок.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Услуга 5 -->
+                <div class="service-card">
+                    <div class="service-number">05</div>
+                    
+                    <div class="service-image-container">
+                        <img src="макияж для себя.JPG" alt="Макияж для себя" class="service-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3 class="service-name">Макияж для себя</h3>
+                        <p class="service-description">
+                            Индивидуальные уроки макияжа. Научу создавать безупречный макияж самостоятельно, 
+                            подбирать косметику и инструменты.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Услуга 6 -->
+                <div class="service-card">
+                    <div class="service-number">06</div>
+                    
+                    <div class="service-image-container">
+                        <img src="полный образ.jpg" alt="Полный образ" class="service-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3 class="service-name">Полный образ</h3>
+                        <p class="service-description">
+                            Комплексная услуга: макияж и прическа. Создаю гармоничный и завершенный образ 
+                            для особых событий, который подчеркивает вашу индивидуальность.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЗАПИСЬ (СКРЫТА ДО НАЖАТИЯ КНОПКИ) -->
+    <section class="booking-section" id="booking">
+        <div class="container">
+            <h2 class="section-title">Запись на услуги</h2>
+            
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label class="form-label" for="name">Ваше имя *</label>
+                    <input type="text" id="name" class="form-control" placeholder="Как к вам обращаться?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="phone">Телефон *</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="+375 (__) ___ __ __" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="instagram">Instagram</label>
+                    <input type="text" id="instagram" class="form-control" placeholder="Ваш Instagram для связи">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="service">Услуга *</label>
+                    <select id="service" class="form-control" required>
+                        <option value="">Выберите услугу</option>
+                        <option value="day">Дневной макияж</option>
+                        <option value="wedding">Свадебный макияж</option>
+                        <option value="evening">Вечерний макияж</option>
+                        <option value="hair">Укладка/прическа</option>
+                        <option value="lesson">Урок макияжа</option>
+                        <option value="full">Полный образ</option>
+                        <option value="consultation">Консультация</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="date">Желаемая дата</label>
+                    <input type="date" id="date" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="message">Дополнительная информация</label>
+                    <textarea id="message" class="form-control" rows="4" placeholder="Расскажите о вашем событии или особых пожеланиях..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ ОТЗЫВОВ С ОТОБРАЖЕНИЕМ -->
+    <section class="feedback-section" id="feedback">
+        <div class="container feedback-container">
+            <h2 class="section-title">Отзывы клиентов</h2>
+            
+            <!-- Блок с существующими отзывами -->
+            <div class="reviews-display">
+                <h3 style="text-align: center; margin-bottom: 40px; color: var(--primary); font-size: 1.8rem;">
+                    Что говорят мои клиенты
+                </h3>
+                
+                <div class="reviews-grid" id="reviewsGrid">
+                    <!-- Отзывы будут добавляться динамически -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Анна</div>
+                                <div class="review-service">Свадебный макияж</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <p class="review-text">
+                            Алина создала для меня идеальный свадебный образ! Макияж держался весь день, несмотря на слезы радости. 
+                            Все гости были в восторге. Спасибо за профессионализм и чуткость!
+                        </p>
+                        <div class="review-date">15 мая 2024</div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Мария</div>
+                                <div class="review-service">Вечерний макияж</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <p class="review-text">
+                            Обратилась к Алине перед важным корпоративом. Результат превзошел все ожидания! 
+                            Макияж был стойким, выглядела естественно и очень элегантно. Обязательно вернусь!
+                        </p>
+                        <div class="review-date">22 апреля 2024</div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Екатерина</div>
+                                <div class="review-service">Курс "Макияж для себя"</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <p class="review-text">
+                            Прошла курс "Макияж для себя" и теперь делаю идеальный макияж самостоятельно! 
+                            Алина научила подбирать косметику под мой тип кожи и цветотип. Очень довольна результатом!
+                        </p>
+                        <div class="review-date">10 марта 2024</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Форма для отправки отзывов -->
+            <div class="feedback-form-container">
+                <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary); font-size: 1.8rem;">
+                    Поделитесь впечатлениями
+                </h3>
+                
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label class="form-label" for="feedbackName">Ваше имя *</label>
+                        <input type="text" id="feedbackName" class="form-control" placeholder="Как к вам обращаться?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Оценка *</label>
+                        <div class="rating-group">
+                            <span class="rating-star" data-value="1">★</span>
+                            <span class="rating-star" data-value="2">★</span>
+                            <span class="rating-star" data-value="3">★</span>
+                            <span class="rating-star" data-value="4">★</span>
+                            <span class="rating-star" data-value="5">★</span>
+                        </div>
+                        <input type="hidden" id="rating" name="rating" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="feedbackService">Услуга</label>
+                        <select id="feedbackService" class="form-control">
+                            <option value="">Не выбрано</option>
+                            <option value="Дневной макияж">Дневной макияж</option>
+                            <option value="Свадебный макияж">Свадебный макияж</option>
+                            <option value="Вечерний макияж">Вечерний макияж</option>
+                            <option value="Прическа">Прическа</option>
+                            <option value="Обучение">Обучение</option>
+                            <option value="Полный образ">Полный образ</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="feedbackMessage">Ваш отзыв *</label>
+                        <textarea id="feedbackMessage" class="form-control" rows="5" placeholder="Что вам понравилось? Какие впечатления?" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Оставить отзыв</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР - ОБНОВЛЕННЫЙ -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Pekarskaya Alina</h3>
+                <p>Профессиональный визажист и стилист по прическам</p>
+                
+                <div class="social-links">
+                    <a href="https://www.instagram.com/pekarskaya_makeup?igsh=Y2g2M3JoMXJrcGp3" 
+                       target="_blank" 
+                       aria-label="Instagram"
+                       title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://t.me/alinaaa12345" 
+                       target="_blank" 
+                       aria-label="Telegram"
+                       title="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 Alina<br>
+                    Создание твоих неповторимых образов
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- КНОПКА НАВЕРХ -->
+    <button class="back-to-top" id="backToTop" aria-label="Наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        $(document).ready(function() {
+            // МОБИЛЬНОЕ МЕНЮ
+            $('#mobile-menu').click(function() {
+                $(this).toggleClass('active');
+                $('.nav-links').toggleClass('active');
+                $('body').toggleClass('menu-open');
+            });
+            
+            // Закрытие меню при клике на ссылку
+            $('.nav-links a').click(function() {
+                $('#mobile-menu').removeClass('active');
+                $('.nav-links').removeClass('active');
+            });
+            
+            // ПЛАВНАЯ ПРОКРУТКА
+            $('a[href^="#"]').click(function(e) {
+                e.preventDefault();
+                const target = $(this.getAttribute('href'));
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 80
+                    }, 800);
+                }
+            });
+            
+            // КНОПКА ПРОКРУТКИ ВНИЗ
+            $('#scroll-down').click(function() {
+                $('html, body').animate({
+                    scrollTop: $('#about').offset().top - 80
+                }, 800);
+            });
+            
+            // ИЗМЕНЕНИЕ НАВИГАЦИИ ПРИ ПРОКРУТКЕ
+            $(window).scroll(function() {
+                // Навигация
+                if ($(this).scrollTop() > 50) {
+                    $('#main-nav').addClass('nav-scrolled');
+                } else {
+                    $('#main-nav').removeClass('nav-scrolled');
+                }
+                
+                // Кнопка "Наверх"
+                if ($(this).scrollTop() > 300) {
+                    $('#backToTop').addClass('visible');
+                } else {
+                    $('#backToTop').removeClass('visible');
+                }
+            });
+            
+            // КНОПКА "НАВЕРХ"
+            $('#backToTop').click(function() {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+            });
+            
+            // Анимация при наведении на зеркало
+            $('.mirror-element').hover(
+                function() {
+                    $(this).css('animation-play-state', 'paused');
+                },
+                function() {
+                    $(this).css('animation-play-state', 'running');
+                }
+            );
+            
+            // Анимация при прокрутке к секции "Обо мне"
+            function animateOnScroll() {
+                $('.note-card, .photo-frame').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animated');
+                    }
+                });
+            }
+            
+            // Инициализация при загрузке
+            animateOnScroll();
+            
+            // Анимация при скролле
+            $(window).scroll(function() {
+                animateOnScroll();
+            });
+            
+            // Анимация заметок при наведении
+            $('.note-card').hover(
+                function() {
+                    $(this).find('.note-decoration').css({
+                        'transform': 'rotate(15deg) scale(1.2)',
+                        'color': 'var(--accent)'
+                    });
+                },
+                function() {
+                    $(this).find('.note-decoration').css({
+                        'transform': 'rotate(0) scale(1)',
+                        'color': 'rgba(139, 0, 0, 0.2)'
+                    });
+                }
+            );
+            
+            // РЕЙТИНГ ЗВЕЗДОЧКАМИ
+            $('.rating-star').click(function() {
+                const value = $(this).data('value');
+                $('#rating').val(value);
+                
+                $('.rating-star').removeClass('active');
+                $(this).addClass('active');
+                $(this).prevAll('.rating-star').addClass('active');
+            });
+            
+            // ПОКАЗАТЬ СЕКЦИЮ ЗАПИСИ ПРИ НАЖАТИИ КНОПОК
+            function showBookingSection() {
+                // Показываем секцию записи
+                $('.booking-section').addClass('active');
+                
+                // Прокручиваем к секции записи
+                $('html, body').animate({
+                    scrollTop: $('#booking').offset().top - 80
+                }, 800);
+                
+                // Закрываем мобильное меню если оно открыто
+                $('#mobile-menu').removeClass('active');
+                $('.nav-links').removeClass('active');
+            }
+            
+            // Обработчики для кнопок "Записаться"
+            $('#book-nav-btn').click(function(e) {
+                e.preventDefault();
+                showBookingSection();
+            });
+            
+            $('#hero-book-btn').click(function(e) {
+                e.preventDefault();
+                showBookingSection();
+            });
+            
+            $('#nav-booking-link').click(function(e) {
+                e.preventDefault();
+                showBookingSection();
+            });
+            
+            // ОБРАБОТКА ФОРМЫ ЗАПИСИ
+            $('#bookingForm').submit(function(e) {
+                e.preventDefault();
+                
+                // Валидация телефона
+                const phone = $('#phone').val();
+                if (!phone.match(/^\+375 \(\d{2}\) \d{3} \d{2} \d{2}$/)) {
+                    alert('Пожалуйста, введите корректный номер телефона в формате: +375 (__) ___ __ __');
+                    return;
+                }
+                
+                // Имитация отправки
+                const submitBtn = $(this).find('.submit-btn');
+                const originalText = submitBtn.text();
+                
+                submitBtn.prop('disabled', true).text('Отправка...');
+                
+                setTimeout(() => {
+                    alert('Заявка отправлена! Я свяжусь с вами в ближайшее время.');
+                    $(this)[0].reset();
+                    submitBtn.prop('disabled', false).text(originalText);
+                    
+                    // Прокрутка вверх формы
+                    $('html, body').animate({
+                        scrollTop: $('#booking').offset().top - 80
+                    }, 500);
+                }, 1500);
+            });
+            
+            // МАСКА ТЕЛЕФОНА
+            $('#phone').on('input', function() {
+                let value = $(this).val().replace(/\D/g, '');
+                
+                if (value.length > 0) {
+                    value = '+375 (' + value.substring(0, 2);
+                }
+                if (value.length > 8) {
+                    value = value.substring(0, 8) + ') ' + value.substring(8, 11);
+                }
+                if (value.length > 13) {
+                    value = value.substring(0, 13) + ' ' + value.substring(13, 15);
+                }
+                if (value.length > 16) {
+                    value = value.substring(0, 16) + ' ' + value.substring(16, 18);
+                }
+                
+                $(this).val(value);
+            });
+            
+            // ОБРАБОТКА ФОРМЫ ОТЗЫВОВ
+            $('#feedbackForm').submit(function(e) {
+                e.preventDefault();
+                
+                // Проверка рейтинга
+                const rating = $('#rating').val();
+                if (!rating) {
+                    alert('Пожалуйста, поставьте оценку');
+                    return;
+                }
+                
+                // Получаем данные формы
+                const name = $('#feedbackName').val();
+                const service = $('#feedbackService').val();
+                const message = $('#feedbackMessage').val();
+                
+                // Имитация отправки
+                const submitBtn = $(this).find('.submit-btn');
+                const originalText = submitBtn.text();
+                
+                submitBtn.prop('disabled', true).text('Отправка...');
+                
+                setTimeout(() => {
+                    // Создаем HTML для нового отзыва
+                    const stars = '★'.repeat(rating);
+                    const currentDate = new Date().toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    
+                    const newReview = `
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div>
+                                    <div class="review-author">${name}</div>
+                                    ${service ? `<div class="review-service">${service}</div>` : ''}
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                ${stars.split('').map(star => `<span class="review-star">${star}</span>`).join('')}
+                            </div>
+                            <p class="review-text">${message}</p>
+                            <div class="review-date">${currentDate}</div>
+                        </div>
+                    `;
+                    
+                    // Добавляем новый отзыв в начало списка
+                    $('#reviewsGrid').prepend(newReview);
+                    
+                    // Показываем уведомление
+                    alert('Спасибо за ваш отзыв! Он добавлен на сайт.');
+                    
+                    // Сбрасываем форму
+                    $(this)[0].reset();
+                    $('.rating-star').removeClass('active');
+                    $('#rating').val('');
+                    submitBtn.prop('disabled', false).text(originalText);
+                    
+                    // Прокручиваем к новому отзыву
+                    $('html, body').animate({
+                        scrollTop: $('#feedback').offset().top - 80
+                    }, 500);
+                }, 1500);
+            });
+            
+            // ЗАЩИТА ИЗОБРАЖЕНИЙ
+            $('img').on('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            
+            // ИНИЦИАЛИЗАЦИЯ ДАТЫ
+            const today = new Date().toISOString().split('T')[0];
+            $('#date').attr('min', today);
+            
+            // Анимация карточек услуг при прокрутке
+            function animateServicesOnScroll() {
+                $('.service-card').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animated');
+                    }
+                });
+            }
+            
+            // Инициализация при загрузке
+            animateServicesOnScroll();
+            
+            // Анимация при скролле
+            $(window).scroll(function() {
+                animateServicesOnScroll();
+            });
+        });
+    </script>
+</body>
+</html>
